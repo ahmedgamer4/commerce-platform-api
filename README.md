@@ -69,187 +69,91 @@ CREATE DATABASE store_test;
 }
 ```
 
-<!-- ### Users
+### Auth 🎯
 
-- `POST /api/v1/users` - Create new user ✅
-- `POST /api/v1/users/authenticate ` - Authenticate user ✅
-- `GET /api/v1/users/:userId ` - Show user ✅
-- `GET /api/v1/users ` - Index users ✅
+- `POST /api/v1/auth/applicant/register` - Register new user (for new applicants only) ✅
+- `POST /api/v1/auth/login` - Login user (Master - Admin - Employee - Applicant) ✅
 
-## Products
+### Storage 🎯
 
-- `GET /api/v1/products` - Index products ✅
-- `POST /api/v1/products` - Create a product ✅
-- `GET /api/v1/products/:productId` - Show product ✅
+- `POST /api/v1/storage/upload` - Upload file ✅
+- `GET /api/v1/storage/download/:fileName` - Download file ✅
 
-## orders
+### Master (authentication required) 🎯
 
-- `POST /api/v1/orders` - Create Order ✅
-- `GET /api/v1/orders/user/:userId` - Index Orders by user id & status (req body) ✅
+#### Collage ⏺
 
-### Users endpoints in details
-* Create new user `http://localhost:3000/api/v1/users [POST]` (generate token)
-* Required:
-1. Request Body
-```
-{
-  "email": "mohamed@gmail.com",
-  "password": "123456",
-  "first_name": "Mohamed",
-  "last_name": "Yasser"
-}
-```
+- `POST /api/v1/master/collages` - Create new collage ✅
+- `GET /api/v1/master/collages` - Index collages ✅
+- `GET /api/v1/master/collages/:collageId` - Show collage ✅
+- `PUT /api/v1/master/collages/:collageId` - Update collage ✅
+- `DELETE /api/v1/master/collages/:collageId` - Delete collage ✅
 
-* Authenticate user `http://localhost:3000/api/v1/users/authenticate [POST]` (generate token)
-* Required:
-1. Request Body
-```
-{
-  "email": "mohamed@gmail.com",
-  "password": "123456"
-}
-```
+#### Admin ⏺
 
-* Show user `http://localhost:3000/api/v1/users/:userId [GET]` (authentication required)
-* Required:
-1. Bearer Token `Bearer [token]`
+- `POST /api/v1/master/collages/:collageId/admins` - Create new admin ✅
+- `GET /api/v1/master/collages/:collageId/admins` - Index admins ✅
+- `GET /api/v1/master/collages/:collageId/admins/:adminId` - Show admin ✅
+- `PUT /api/v1/master/collages/:collageId/admins/:adminId` - Update admin ✅
+- `DELETE /api/v1/master/collages/:collageId/admins/:adminId` - Delete admin ✅
 
-* Index users `http://localhost:3000/api/v1/users [GET]` (authentication required)
-* Required:
-1. Bearer Token `Bearer [token]`
- 
-### Products endpoints in details
-* Create product `http://localhost:3000/api/v1/products [POST]` (authentication required)
-* Required:
-1. Bearer Token `Bearer [token]`
-2. Request Body
-```
-{
-  "name": "product 99",
-  "price": 20,
-  "category": "tech"
-}
-```
+### Admin (authentication required) 🎯
 
-* Show product `http://localhost:3000/api/v1/products/:productId [GET]`
+#### Collage ⏺
 
-* Index product `http://localhost:3000/api/v1/products [GET]`
+- `GET /api/v1/admin/collages/:collageId` - Show collage ✅
 
-### Orders endpoints in details
-* Create Order `http://localhost:3000/api/v1/orders [POST]`
-* Required:
-1. Request Body
-```
-{
-  "userId": "c5b9a9fc-cc7f-466c-8fac-c48a19f77aa8",
-  "productId": "1f6751f5-8f4e-4208-a48d-366ae7f00aef",
-  "quantity": 99,
-  "status": "completed"
-}
-```
+#### Employee ⏺
 
-* Index Orders by user id & status `http://localhost:3000/api/v1/orders/user/:userId [GET]`
-* Optional:
-1. Request Body
-```
-{
-  "status": "completed" // Or active for filter orders
-}
-```
+- `POST /api/v1/admin/collages/:collageId/employees` - Create new employee ✅
+- `GET /api/v1/admin/collages/:collageId/employees` - Index employees ✅
+- `GET /api/v1/admin/collages/:collageId/employees/:employeeId` - Show employee ✅
+- `PUT /api/v1/admin/collages/:collageId/employees/:employeeId` - Update employee ✅
+- `DELETE /api/v1/admin/collages/:collageId/employees/:employeeId` - Delete employee ✅
 
-## Data Shapes
-#### Products (JSON)
-- id (uuid)
-- name (string)
-- price (number)
-- category (string)
-```sql
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-CREATE TABLE IF NOT EXISTS products (
-  id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
-  name VARCHAR(255) NOT NULL,
-  price NUMERIC(10,2) NOT NULL,
-  category VARCHAR(255) NOT NULL
-);
-```
-```json
-{
-  "id": "e0190697-0080-48c0-8fe8-8d22e16f1442",
-  "name": "Product Name",
-  "price": 9.99,
-  "category": "Category Name",
-}
-```
+#### Program ⏺
 
-#### Users (JSON)
-- id (uuid)
-- email (string)
-- first_Name (string)
-- last_Name (string)
-- password (string)
-```sql
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-CREATE TABLE IF NOT EXISTS users (
-  id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
-  email VARCHAR(255) NOT NULL UNIQUE,
-  first_name VARCHAR(255) NOT NULL,
-  last_name VARCHAR(255) NOT NULL,
-  password VARCHAR(255) NOT NULL
-);
-```
-```json
-{
-  "id": "e0190697-0080-48c0-8fe8-8d22e16f1442",
-  "first_name": "First Name",
-  "last_name": "Last Name",
-  "email": "mo@gmail.com",
-  "password": "password",
-}
-```
+- `POST /api/v1/admin/collages/:collageId/programs` - Create new program ✅
+- `GET /api/v1/admin/collages/:collageId/programs` - Index programs ✅
+- `GET /api/v1/admin/collages/:collageId/programs/:programId` - Show program ✅
+- `PUT /api/v1/admin/collages/:collageId/programs/:programId` - Update program ✅
+- `DELETE /api/v1/admin/collages/:collageId/programs/:programId` - Delete program ✅
 
-#### Orders
-- id (uuid)
-- user_id (uuid) (foreign key)
-- status (string)
-```sql
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-CREATE TABLE IF NOT EXISTS orders (
-  id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
-  user_id uuid NOT NULL,
-  status VARCHAR(255) NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-```
-```json
-{
-  "id": "e0190697-0080-48c0-8fe8-8d22e16f1442",
-  "user_id": "e0190697-0080-48c0-8fe8-8d22e16f1442",
-  "product_id": "e0190697-0080-48c0-8fe8-8d22e16f1442",
-  "quantity": 1,
-  "status": "active",
-}
-```
+#### Application ⏺
 
+- `GET /api/v1/admin/collages/:collageId/programs/:programId/applications` - Index applications ✅
 
-#### Order_products
-- id (uuid)
-- order_id (uuid) (foreign key)
-- product_id (uuid) (foreign key)
-- quantity (number)
-```sql
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-CREATE TABLE IF NOT EXISTS order_products (
-  id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
-  order_id uuid NOT NULL,
-  product_id uuid NOT NULL,
-  quantity INTEGER NOT NULL,
-  FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-``` -->
+### Employee (authentication required) 🎯
 
+#### Collage ⏺
 
+- `GET /api/v1/employee/collages/:collageId` - Show collage ✅
 
+#### Program ⏺
 
+- `GET /api/v1/employee/collages/:collageId/programs` - Index programs ✅
+- `GET /api/v1/employee/collages/:collageId/programs/:programId` - Show program ✅
 
+#### Application ⏺
 
+- `GET /api/v1/employee/collages/:collageId/programs/:programId/applications` - Index applications ✅
+- `GET /api/v1/employee/collages/:collageId/programs/:programId/applications/:applicationId` - Show application ✅
+- `PUT /api/v1/employee/collages/:collageId/programs/:programId/applications/:applicationId` - Update application ✅
+
+### Applicant (authentication required) 🎯
+
+#### Collage ⏺
+
+- `GET /api/v1/applicant/collages/:collageId` - Show collage ✅
+
+#### Program ⏺
+
+- `GET /api/v1/applicant/collages/:collageId/programs` - Index programs ✅
+- `GET /api/v1/applicant/collages/:collageId/programs/:programId` - Show program ✅
+- `POST /api/v1/applicant/collages/:collageId/programs/:programId/applications` - Create new application ✅
+
+#### Application ⏺
+
+- `GET /api/v1/applicant/collages/:collageId/programs/:programId/applications` - Index applications (of applicant) ✅
+- `GET /api/v1/applicant/collages/:collageId/programs/:programId/applications/:applicationId` - Show application (of applicant) ✅
+- `PUT /api/v1/applicant/collages/:collageId/programs/:programId/applications/:applicationId` - Update application (of applicant - such as : documents) ✅
