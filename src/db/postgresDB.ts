@@ -8,9 +8,9 @@ const { POSTGRES_HOST, POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD, NODE_ENV, 
 
 const client = new Pool({
   user: POSTGRES_USER,
+  password: POSTGRES_PASSWORD,
   host: POSTGRES_HOST,
   database: NODE_ENV === 'test' ? POSTGRES_DB_TEST : POSTGRES_DB,
-  password: POSTGRES_PASSWORD,
   max: 10,
 })
 
