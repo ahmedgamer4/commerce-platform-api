@@ -12,19 +12,9 @@ const master = new MasterModel();
 const show = async (req: REQ, res: Response, next: NextFunction) => {
   // Get authentication data from request
   const authenticatedUserId = req.userId;
-  const authenticatedUserRole = req.role;
-  console.log(authenticatedUserId);
-  console.log(authenticatedUserRole);
-  // Check if user is authenticated
-  if (!authenticatedUserId || !authenticatedUserRole) {
+  if (!authenticatedUserId) {
     const mes = "Invalid credentials.";
     const statusCode = 400;
-    return next(new HttpError(mes, statusCode));
-  }
-  // Check if user is master
-  if (authenticatedUserRole !== "master") {
-    const mes = "Unauthorized.";
-    const statusCode = 401;
     return next(new HttpError(mes, statusCode));
   }
   // Get master data
