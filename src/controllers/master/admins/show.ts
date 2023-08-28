@@ -8,8 +8,6 @@ const showAdmin = async (req: Request, res: Response, next: NextFunction) => {
   // Get data from body
   const id = req.params.id;
 
-  console.log(req.params);
-
   // Validate data
   if (!id) {
     return next(new HttpError("Invalid id", 400));

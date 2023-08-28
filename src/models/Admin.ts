@@ -38,7 +38,6 @@ export class AdminModel {
     const hashedPassword = await hashingPassword(passwordInput);
 
     const userWithSameEmail = await connection.query(`SELECT * FROM ${this.tableName} WHERE email = $1`, [email]);
-    console.log(userWithSameEmail);
     if (!!userWithSameEmail.rows[0]) {
       throw new HttpError("Admin already exists", 400);
     }

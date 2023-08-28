@@ -9,9 +9,6 @@ const createAdmin = async (req: Request, res: Response, next: NextFunction) => {
   const collageId = (req as any).collageId;
   const { name, email, password } = req.body;
 
-  console.log(collageId);
-  console.log(req.originalUrl);
-
   // Validate data
   if (!name || !email || !password) {
     return next(new HttpError("Invalid data", 400));
