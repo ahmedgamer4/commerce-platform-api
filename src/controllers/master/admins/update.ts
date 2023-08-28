@@ -7,17 +7,17 @@ const admin = new AdminModel();
 const updateAdmin = async (req: Request, res: Response, next: NextFunction) => {
   // Get data from body
   const id = req.params.id;
-  const { name, password } = req.body;
+  const { name, password, email, collageId } = req.body;
 
   // Validate data
-  if (!name && !password) {
+  if (!name && !password && !email) {
     return next(new HttpError("Please provide name or password", 400));
   }
 
   // Update admin
   let updatedAdmin;
   try {
-    updatedAdmin = await admin.updateAdmin(id, name, password);
+    updatedAdmin = await admin.updateAdmin(id, name, password, email, collageId);
   } catch (err) {
     return next(err);
   }
