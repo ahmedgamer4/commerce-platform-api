@@ -7,7 +7,8 @@ const admin = new AdminModel();
 const updateAdmin = async (req: Request, res: Response, next: NextFunction) => {
   // Get data from body
   const id = req.params.id;
-  const { name, password, email, collageId } = req.body;
+  const collageId = (req as any).collageId;
+  const { name, password, email } = req.body;
 
   // Validate data
   if (!name && !password && !email) {

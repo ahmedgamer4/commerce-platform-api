@@ -7,6 +7,7 @@ const admin = new AdminModel();
 const showAdmin = async (req: Request, res: Response, next: NextFunction) => {
   // Get data from body
   const id = req.params.id;
+  const collageId = (req as any).collageId;
 
   // Validate data
   if (!id) {
@@ -16,7 +17,7 @@ const showAdmin = async (req: Request, res: Response, next: NextFunction) => {
   // Retrieve admin
   let retrievedAdmin;
   try {
-    retrievedAdmin = await admin.showAdmin(id);
+    retrievedAdmin = await admin.showAdmin(id, collageId);
   } catch (err) {
     return next(err);
   }

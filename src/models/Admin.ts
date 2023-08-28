@@ -29,8 +29,7 @@ export class AdminModel {
     try {
       connection = await client.connect();
     } catch (err) {
-      const msg = `Could not connect to database: ${(err as HttpError).message
-        }`;
+      const msg = `Could not connect to database: ${(err as HttpError).message}`;
       const statusCode = 500;
       throw new HttpError(msg, statusCode);
     }
@@ -187,7 +186,7 @@ export class AdminModel {
     };
   }
 
-  async showAdmin(id: string): Promise<AdminResp> {
+  async showAdmin(id: string, collageId: string): Promise<AdminResp> {
     let connection;
     try {
       connection = await client.connect();
@@ -200,8 +199,8 @@ export class AdminModel {
 
     let res;
     try {
-      const query = `SELECT * FROM ${this.tableName} WHERE id = $1`;
-      res = await connection.query(query, [id]);
+      const query = `SELECT * FROM ${this.tableName} WHERE id = $1 AND collage_id = $2`;
+      res = await connection.query(query, [id, collageId]);
     } catch (err) {
       const msg = `Admin could not be retrieved: ${(err as HttpError).message}`;
       const statusCode = 500;
@@ -242,38 +241,38 @@ export class AdminModel {
     try {
       if (name && passwordInput && email) {
 
-        const query = `UPDATE ${this.tableName} SET name=$1, password=$2, email=$3 WHERE id=$4 RETURNING *`;
+        const query = `UPDATE ${this.tableName} SET name=$1, password=$2, email=$3 WHERE id=$4 AND collage_id=$5 RETURNING *`;
         const hashedPassword = await hashingPassword(passwordInput);
-        res = await connection.query(query, [name, hashedPassword, email, id]);
+        res = await connection.query(query, [name, hashedPassword, email, id, collageId]);
       } else if (name && passwordInput) {
 
-        const query = `UPDATE ${this.tableName} SET name=$1, password=$2 WHERE id=$3 RETURNING *`;
+        const query = `UPDATE ${this.tableName} SET name=$1, password=$2 WHERE id=$3 AND collage_id=$4  RETURNING *`;
         const hashedPassword = await hashingPassword(passwordInput);
-        res = await connection.query(query, [name, hashedPassword, id]);
+        res = await connection.query(query, [name, hashedPassword, id, collageId]);
       } else if (name && email) {
 
-        const query = `UPDATE ${this.tableName} SET name=$1, email=$2 WHERE id=$3 RETURNING *`;
-        res = await connection.query(query, [name, email, id]);
+        const query = `UPDATE ${this.tableName} SET name=$1, email=$2 WHERE id=$3 AND collage_id=$4 RETURNING *`;
+        res = await connection.query(query, [name, email, id, collageId]);
       } else if (passwordInput && email) {
 
-        const query = `UPDATE ${this.tableName} SET email=$1, password=$2 WHERE id=$3 RETURNING *`;
+        const query = `UPDATE ${this.tableName} SET email=$1, password=$2 WHERE id=$3 AND collage_id=$4 RETURNING *`;
         const hashedPassword = await hashingPassword(passwordInput);
-        res = await connection.query(query, [email, hashedPassword, id]);
+        res = await connection.query(query, [email, hashedPassword, id, collageId]);
       } else if (name && !passwordInput && !email) {
 
-        const query = `UPDATE ${this.tableName} SET name=$1 WHERE id=$2 RETURNING *`;
-        res = await connection.query(query, [name, id]);
+        const query = `UPDATE ${this.tableName} SET name=$1 WHERE id=$2 AND collage_id=$3 RETURNING *`;
+        res = await connection.query(query, [name, id, collageId]);
       } else if (email) {
 
-        const query = `UPDATE ${this.tableName} SET email=$1 WHERE id=$2 RETURNING *`;
-        res = await connection.query(query, [email, id]);
+        const query = `UPDATE ${this.tableName} SET email=$1 WHERE id=$2 AND collage_id=$3 RETURNING *`;
+        res = await connection.query(query, [email, id, collageId]);
       } else if (passwordInput) {
 
-        const query = `UPDATE ${this.tableName} SET  password=$1 WHERE id=$2 RETURNING *`;
+        const query = `UPDATE ${this.tableName} SET  password=$1 WHERE id=$2 AND collage_id=$3 RETURNING *`;
         const hashedPassword = hashingPassword(passwordInput);
-        res = await connection.query(query, [hashedPassword, id]);
+        res = await connection.query(query, [hashedPassword, id, collageId]);
       } else {
-        return this.showAdmin(id);
+        return this.showAdmin(id, collageId);
       }
     } catch (err) {
       const msg = `Could not update admin: ${(err as HttpError).message}`;
@@ -294,7 +293,7 @@ export class AdminModel {
     return rest;
   }
 
-  async deleteAdmin(id: string): Promise<AdminResp> {
+  async deleteAdmin(id: string, collageId: string): Promise<AdminResp> {
     let connection;
     try {
       connection = await client.connect();
@@ -307,8 +306,8 @@ export class AdminModel {
 
     let res;
     try {
-      const query = `DELETE FROM ${this.tableName} WHERE id = $1 RETURNING *`;
-      res = await connection.query(query, [id]);
+      const query = `DELETE FROM ${this.tableName} WHERE id = $1 AND collage_id=$2 RETURNING *`;
+      res = await connection.query(query, [id, collageId]);
     } catch (err) {
       const msg = `Admin could not be deleted: ${(err as HttpError).message}`;
       const statusCode = 500;

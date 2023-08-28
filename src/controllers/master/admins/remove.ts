@@ -7,6 +7,7 @@ const admin = new AdminModel();
 const removeAdmin = async (req: Request, res: Response, next: NextFunction) => {
   // Get data from body
   const id = req.params.id;
+  const collageId = (req as any).collageId;
 
   // Validate data
   if (!id) {
@@ -16,7 +17,7 @@ const removeAdmin = async (req: Request, res: Response, next: NextFunction) => {
   // Retrieve admin
   let removedAdmin;
   try {
-    removedAdmin = await admin.deleteAdmin(id);
+    removedAdmin = await admin.deleteAdmin(id, collageId);
   } catch (err) {
     return next(err);
   }
