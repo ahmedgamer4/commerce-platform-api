@@ -4,9 +4,11 @@ import HttpError from "../../models/httpError";
 import { Request, Response, NextFunction } from "express";
 import generateAuthTokens from "../../utils/generateAuthTokens";
 import validator from "validator";
+import EmployeeModel from "../../models/Employee";
 
 const master = new MasterModel();
 const admin = new AdminModel();
+const employee = new EmployeeModel();
 
 const login = async (req: Request, res: Response, next: NextFunction) => {
   // get data from request body
@@ -47,7 +49,8 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
   } else if (role === "applicant") {
     // authenticate applicant
   } else if (role === "employee") {
-    // authenticate employee
+    const employeeData = await employee.authenticate(email, password);
+    authenticatedUserId = employeeData;
   } else {
     const mes = "Invalid role.";
     const statusCode = 400;
