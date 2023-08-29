@@ -17,7 +17,7 @@ const removeAdmin = async (req: Request, res: Response, next: NextFunction) => {
   // Retrieve admin
   let removedAdmin;
   try {
-    removedAdmin = await admin.deleteAdmin(id, collageId);
+    removedAdmin = await admin.delete(id, collageId);
   } catch (err) {
     return next(err);
   }

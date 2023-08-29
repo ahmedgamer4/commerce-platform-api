@@ -11,7 +11,7 @@ const indexAdmin = async (req: Request, res: Response, next: NextFunction) => {
 
   let admins;
   try {
-    admins = await admin.indexAdmin(page, limit);
+    admins = await admin.index(page, limit);
   } catch (err) {
     return next(err);
   }

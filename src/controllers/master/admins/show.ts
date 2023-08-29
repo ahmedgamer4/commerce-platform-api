@@ -17,7 +17,7 @@ const showAdmin = async (req: Request, res: Response, next: NextFunction) => {
   // Retrieve admin
   let retrievedAdmin;
   try {
-    retrievedAdmin = await admin.showAdmin(id, collageId);
+    retrievedAdmin = await admin.show(id, collageId);
   } catch (err) {
     return next(err);
   }

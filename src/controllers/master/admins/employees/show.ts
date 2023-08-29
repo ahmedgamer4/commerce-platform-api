@@ -18,7 +18,7 @@ const showEmployee = async (req: CollageREQ, res: Response, next: NextFunction) 
   // Retrieve employee
   let retrievedEmployee;
   try {
-    retrievedEmployee = await employee.showEmployee(id, collageId!);
+    retrievedEmployee = await employee.show(id, collageId!);
   } catch (err) {
     return next(err);
   }

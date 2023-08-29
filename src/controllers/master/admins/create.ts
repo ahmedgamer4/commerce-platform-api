@@ -17,12 +17,12 @@ const createAdmin = async (req: Request, res: Response, next: NextFunction) => {
   // Create admin
   let newAdmin;
   try {
-    newAdmin = await admin.createAdmin(name, email, password, collageId);
+    newAdmin = await admin.create(name, email, password, collageId);
   } catch (error) {
     return next(error);
   }
 
-  // Check if admin was created
+ // Check if admin was created
   if (!newAdmin) {
     return next(new HttpError("Could not create admin", 500));
   }

@@ -19,7 +19,7 @@ const updateEmployee = async (req: CollageREQ, res: Response, next: NextFunction
   // Update employee
   let updatedEmployee;
   try {
-    updatedEmployee = await employee.updateEmployee(id, name, password, email, collageId!);
+    updatedEmployee = await employee.update(id, name, password, email, collageId!);
   } catch (err) {
     return next(err);
   }

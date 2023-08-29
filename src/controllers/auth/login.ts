@@ -39,7 +39,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
   } else if (role === "admin") {
     // authenticate admin
     try {
-      const adminData = await admin.authenticateAdmin(email, password);
+      const adminData = await admin.authenticate(email, password);
       authenticatedUserId = adminData.id;
     } catch (error) {
       return next(error);

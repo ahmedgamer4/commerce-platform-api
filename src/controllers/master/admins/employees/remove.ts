@@ -18,7 +18,7 @@ const removeEmployee = async (req: CollageREQ, res: Response, next: NextFunction
   // Remove employee
   let removedEmployee;
   try {
-    removedEmployee = await employee.deleteEmployee(id, collageId!);
+    removedEmployee = await employee.delete(id, collageId!);
   } catch (err) {
     return next(err);
   }

@@ -18,7 +18,7 @@ const createEmployee = async (req: CollageREQ, res: Response, next: NextFunction
   // Create employee
   let newEmployee;
   try {
-    newEmployee = await employee.createEmployee(name, email, password, collageId!);
+    newEmployee = await employee.create(name, email, password, collageId!);
   } catch (error) {
     return next(error);
   }

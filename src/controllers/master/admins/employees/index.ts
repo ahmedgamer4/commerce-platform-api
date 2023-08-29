@@ -11,7 +11,7 @@ const indexEmployee = async (req: Request, res: Response, next: NextFunction) =>
 
   let employees;
   try {
-    employees = await employee.indexEmployee(page, limit);
+    employees = await employee.index(page, limit);
   } catch (err) {
     return next(err);
   }

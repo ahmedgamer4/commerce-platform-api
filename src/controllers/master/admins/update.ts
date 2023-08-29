@@ -18,7 +18,7 @@ const updateAdmin = async (req: Request, res: Response, next: NextFunction) => {
   // Update admin
   let updatedAdmin;
   try {
-    updatedAdmin = await admin.updateAdmin(id, name, password, email, collageId);
+    updatedAdmin = await admin.update(id, name, password, email, collageId);
   } catch (err) {
     return next(err);
   }
