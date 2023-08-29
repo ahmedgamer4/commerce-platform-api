@@ -1,14 +1,14 @@
 import EmployeeModel from "../../../../models/Employee";
 import HttpError from "../../../../models/httpError";
 import { Request, Response, NextFunction } from "express";
-import { CollageREQ } from "../../../../routes/api/v1/master/collage/collageRoutes";
+import { CollageREQ } from "../../../../utils/signCollageIdToReq";
 
 const employee = new EmployeeModel();
 
-const updateAdmin = async (req: Request, res: Response, next: NextFunction) => {
+const updateEmployee = async (req: CollageREQ, res: Response, next: NextFunction) => {
   // Get data from body
   const id = req.params.id;
-  const collageId = (req as CollageREQ).collageId;
+  const collageId = req.collageId;
   const { name, password, email } = req.body;
 
   // Validate data
@@ -19,7 +19,7 @@ const updateAdmin = async (req: Request, res: Response, next: NextFunction) => {
   // Update employee
   let updatedEmployee;
   try {
-    updatedEmployee = await employee.updateEmployee(id, name, password, email, collageId);
+    updatedEmployee = await employee.updateEmployee(id, name, password, email, collageId!);
   } catch (err) {
     return next(err);
   }
@@ -39,4 +39,4 @@ const updateAdmin = async (req: Request, res: Response, next: NextFunction) => {
   });
 };
 
-export default updateAdmin;
+export default updateEmployee;

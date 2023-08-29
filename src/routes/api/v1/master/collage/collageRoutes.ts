@@ -7,10 +7,6 @@ import remove from "../../../../../controllers/master/collages/remove";
 
 const collageRoutes = express.Router();
 
-export interface CollageREQ extends express.Request {
-  collageId: string;
-}
-
 collageRoutes.post("/", create);
 collageRoutes.get("/", index);
 collageRoutes.get("/:id", show);

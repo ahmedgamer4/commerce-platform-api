@@ -1,13 +1,13 @@
 import HttpError from "../../../../models/httpError";
 import { Request, Response, NextFunction } from "express";
 import EmployeeModel from "../../../../models/Employee";
-import { CollageREQ } from "../../../../routes/api/v1/master/collage/collageRoutes";
+import { CollageREQ } from "../../../../utils/signCollageIdToReq";
 
 const employee = new EmployeeModel();
 
-const createEmployee = async (req: Request, res: Response, next: NextFunction) => {
+const createEmployee = async (req: CollageREQ, res: Response, next: NextFunction) => {
   // Get data from body
-  const collageId = (req as CollageREQ).collageId;
+  const collageId = req.collageId;
   const { name, email, password } = req.body;
 
   // Validate data
@@ -18,7 +18,7 @@ const createEmployee = async (req: Request, res: Response, next: NextFunction) =
   // Create employee
   let newEmployee;
   try {
-    newEmployee = await employee.createEmployee(name, email, password, collageId);
+    newEmployee = await employee.createEmployee(name, email, password, collageId!);
   } catch (error) {
     return next(error);
   }

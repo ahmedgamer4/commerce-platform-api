@@ -1,14 +1,14 @@
 import EmployeeModel from "../../../../models/Employee";
 import HttpError from "../../../../models/httpError";
 import { Request, Response, NextFunction } from "express";
-import { CollageREQ } from "../../../../routes/api/v1/master/collage/collageRoutes";
+import { CollageREQ } from "../../../../utils/signCollageIdToReq";
 
 const employee = new EmployeeModel();
 
-const removeEmployee = async (req: Request, res: Response, next: NextFunction) => {
+const removeEmployee = async (req: CollageREQ, res: Response, next: NextFunction) => {
   // Get data from body
   const id = req.params.id;
-  const collageId = (req as CollageREQ).collageId;
+  const collageId = req.collageId;
 
   // Validate data
   if (!id) {
@@ -18,7 +18,7 @@ const removeEmployee = async (req: Request, res: Response, next: NextFunction) =
   // Remove employee
   let removedEmployee;
   try {
-    removedEmployee = await employee.deleteEmployee(id, collageId);
+    removedEmployee = await employee.deleteEmployee(id, collageId!);
   } catch (err) {
     return next(err);
   }

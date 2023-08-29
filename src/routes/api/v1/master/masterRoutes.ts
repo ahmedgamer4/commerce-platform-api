@@ -2,6 +2,7 @@ import express from "express";
 import show from "../../../../controllers/master/me/show";
 import collageRoutes from "./collage/collageRoutes";
 import adminRoutes from "./admin/adminRoutes";
+import { signCollageIdToReq } from "../../../../utils/signCollageIdToReq";
 
 const masterRoutes = express.Router();
 
@@ -11,10 +12,7 @@ masterRoutes.get("/me", show);
 // Admin Routes
 collageRoutes.use(
   "/:collageId/admins",
-  (req, res, next) => {
-    (req as any).collageId = req.params.collageId;
-    next();
-  },
+  signCollageIdToReq,
   adminRoutes
 );
 
