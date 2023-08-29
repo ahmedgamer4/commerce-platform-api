@@ -1,10 +1,12 @@
 import { MasterModel } from "../../models/Master";
+import { AdminModel } from "../../models/Admin";
 import HttpError from "../../models/httpError";
 import { Request, Response, NextFunction } from "express";
 import generateAuthTokens from "../../utils/generateAuthTokens";
 import validator from "validator";
 
 const master = new MasterModel();
+const admin = new AdminModel();
 
 const login = async (req: Request, res: Response, next: NextFunction) => {
   // get data from request body
@@ -36,6 +38,12 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
     }
   } else if (role === "admin") {
     // authenticate admin
+    try {
+      const adminData = await admin.authenticateAdmin(email, password);
+      authenticatedUserId = adminData.id;
+    } catch (error) {
+      return next(error);
+    }
   } else if (role === "applicant") {
     // authenticate applicant
   } else if (role === "employee") {
