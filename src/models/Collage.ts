@@ -166,18 +166,10 @@ export class CollageModel {
     // query database
     let result;
     try {
-      if (name && !universityName) {
-        const sql = "UPDATE collage SET name = $1 WHERE id = $2 RETURNING *";
-        result = await connection.query(sql, [name, id]);
-      } else if (universityName && !name) {
-        const sql =
-          "UPDATE collage SET university_name = $1 WHERE id = $2 RETURNING *";
-        result = await connection.query(sql, [universityName, id]);
-      } else {
-        const sql =
-          "UPDATE collage SET name = $1, university_name = $2 WHERE id = $3 RETURNING *";
-        result = await connection.query(sql, [name, universityName, id]);
-      }
+      // Update only the provided fields dynamically
+      const sql =
+        "UPDATE collage SET name = COALESCE($1, name), university_name = COALESCE($2, university_name) WHERE id = $3 RETURNING *";
+      result = await connection.query(sql, [name, universityName, id]);
     } catch (error) {
       const mes = `Could not update collage. ${(error as HttpError).message}`;
       const statusCode = 500;

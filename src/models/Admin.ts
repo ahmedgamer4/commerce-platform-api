@@ -13,7 +13,7 @@ export type Admin = {
   updated_at: string;
 };
 
-type AdminResp = Omit<Admin, "password">
+type AdminResp = Omit<Admin, "password">;
 
 export class AdminModel {
   private tableName = "admin";
@@ -29,14 +29,19 @@ export class AdminModel {
     try {
       connection = await client.connect();
     } catch (err) {
-      const msg = `Could not connect to database: ${(err as HttpError).message}`;
+      const msg = `Could not connect to database: ${
+        (err as HttpError).message
+      }`;
       const statusCode = 500;
       throw new HttpError(msg, statusCode);
     }
 
     const hashedPassword = await hashingPassword(passwordInput);
 
-    const userWithSameEmail = await connection.query(`SELECT * FROM ${this.tableName} WHERE email = $1`, [email]);
+    const userWithSameEmail = await connection.query(
+      `SELECT * FROM ${this.tableName} WHERE email = $1`,
+      [email]
+    );
     if (!!userWithSameEmail.rows[0]) {
       throw new HttpError("Admin already exists", 400);
     }
@@ -52,8 +57,9 @@ export class AdminModel {
         collageId,
       ]);
     } catch (err) {
-      const msg = `New admin could not be created: ${(err as HttpError).message
-        }`;
+      const msg = `New admin could not be created: ${
+        (err as HttpError).message
+      }`;
       const statusCode = 500;
       throw new HttpError(msg, statusCode);
     } finally {
@@ -66,7 +72,7 @@ export class AdminModel {
       throw new HttpError(msg, statusCode);
     }
 
-    const { password, ...rest } = (res.rows[0]) as Admin
+    const { password, ...rest } = res.rows[0] as Admin;
 
     return rest;
   }
@@ -76,8 +82,9 @@ export class AdminModel {
     try {
       connection = await client.connect();
     } catch (error) {
-      const msg = `Could not connect to database. ${(error as HttpError).message
-        }`;
+      const msg = `Could not connect to database. ${
+        (error as HttpError).message
+      }`;
       const statusCode = 500;
       throw new HttpError(msg, statusCode);
     }
@@ -87,8 +94,9 @@ export class AdminModel {
       const query = `SELECT * FROM ${this.tableName} WHERE email = $1`;
       res = await connection.query(query, [email]);
     } catch (err) {
-      const msg = `Admin could not be authenticated: ${(err as HttpError).message
-        }`;
+      const msg = `Admin could not be authenticated: ${
+        (err as HttpError).message
+      }`;
       const statusCode = 500;
       throw new HttpError(msg, statusCode);
     } finally {
@@ -122,8 +130,9 @@ export class AdminModel {
     try {
       connection = await client.connect();
     } catch (error) {
-      const msg = `Could not connect to the database. ${(error as HttpError).message
-        }`;
+      const msg = `Could not connect to the database. ${
+        (error as HttpError).message
+      }`;
       const statusCode = 500;
       throw new HttpError(msg, statusCode);
     }
@@ -174,7 +183,7 @@ export class AdminModel {
       throw new HttpError(msg, statusCode);
     }
 
-    const resp = []
+    const resp = [];
     for (let admin of res.rows) {
       const { password, ...rest } = admin as Admin;
       resp.push(rest);
@@ -191,16 +200,17 @@ export class AdminModel {
     try {
       connection = await client.connect();
     } catch (err) {
-      const msg = `Could not connect to database: ${(err as HttpError).message
-        }`;
+      const msg = `Could not connect to database: ${
+        (err as HttpError).message
+      }`;
       const statusCode = 500;
       throw new HttpError(msg, statusCode);
     }
 
     let res;
     try {
-      const query = `SELECT * FROM ${this.tableName} WHERE id = $1 AND collage_id = $2`;
-      res = await connection.query(query, [id, collageId]);
+      const query = `SELECT * FROM ${this.tableName} WHERE id = $1`;
+      res = await connection.query(query, [id]);
     } catch (err) {
       const msg = `Admin could not be retrieved: ${(err as HttpError).message}`;
       const statusCode = 500;
@@ -215,7 +225,7 @@ export class AdminModel {
       throw new HttpError(msg, statusCode);
     }
 
-    const { password, ...rest } = (res.rows[0]) as Admin
+    const { password, ...rest } = res.rows[0] as Admin;
 
     return rest;
   }
@@ -225,14 +235,15 @@ export class AdminModel {
     name: string,
     passwordInput: string,
     email: string,
-    collageId: string,
+    collageId: string
   ): Promise<AdminResp> {
     let connection;
     try {
       connection = await client.connect();
     } catch (err) {
-      const msg = `Could not connect to database: ${(err as HttpError).message
-        }`;
+      const msg = `Could not connect to database: ${
+        (err as HttpError).message
+      }`;
       const statusCode = 500;
       throw new HttpError(msg, statusCode);
     }
@@ -240,34 +251,43 @@ export class AdminModel {
     let res;
     try {
       if (name && passwordInput && email) {
-
         const query = `UPDATE ${this.tableName} SET name=$1, password=$2, email=$3 WHERE id=$4 AND collage_id=$5 RETURNING *`;
         const hashedPassword = await hashingPassword(passwordInput);
-        res = await connection.query(query, [name, hashedPassword, email, id, collageId]);
+        res = await connection.query(query, [
+          name,
+          hashedPassword,
+          email,
+          id,
+          collageId,
+        ]);
       } else if (name && passwordInput) {
-
         const query = `UPDATE ${this.tableName} SET name=$1, password=$2 WHERE id=$3 AND collage_id=$4  RETURNING *`;
         const hashedPassword = await hashingPassword(passwordInput);
-        res = await connection.query(query, [name, hashedPassword, id, collageId]);
+        res = await connection.query(query, [
+          name,
+          hashedPassword,
+          id,
+          collageId,
+        ]);
       } else if (name && email) {
-
         const query = `UPDATE ${this.tableName} SET name=$1, email=$2 WHERE id=$3 AND collage_id=$4 RETURNING *`;
         res = await connection.query(query, [name, email, id, collageId]);
       } else if (passwordInput && email) {
-
         const query = `UPDATE ${this.tableName} SET email=$1, password=$2 WHERE id=$3 AND collage_id=$4 RETURNING *`;
         const hashedPassword = await hashingPassword(passwordInput);
-        res = await connection.query(query, [email, hashedPassword, id, collageId]);
+        res = await connection.query(query, [
+          email,
+          hashedPassword,
+          id,
+          collageId,
+        ]);
       } else if (name && !passwordInput && !email) {
-
         const query = `UPDATE ${this.tableName} SET name=$1 WHERE id=$2 AND collage_id=$3 RETURNING *`;
         res = await connection.query(query, [name, id, collageId]);
       } else if (email) {
-
         const query = `UPDATE ${this.tableName} SET email=$1 WHERE id=$2 AND collage_id=$3 RETURNING *`;
         res = await connection.query(query, [email, id, collageId]);
       } else if (passwordInput) {
-
         const query = `UPDATE ${this.tableName} SET  password=$1 WHERE id=$2 AND collage_id=$3 RETURNING *`;
         const hashedPassword = hashingPassword(passwordInput);
         res = await connection.query(query, [hashedPassword, id, collageId]);
@@ -288,7 +308,7 @@ export class AdminModel {
       throw new HttpError(msg, statusCode);
     }
 
-    const { password, ...rest } = (res.rows[0]) as Admin
+    const { password, ...rest } = res.rows[0] as Admin;
 
     return rest;
   }
@@ -298,8 +318,9 @@ export class AdminModel {
     try {
       connection = await client.connect();
     } catch (err) {
-      const msg = `Could not connect to database: ${(err as HttpError).message
-        }`;
+      const msg = `Could not connect to database: ${
+        (err as HttpError).message
+      }`;
       const statusCode = 500;
       throw new HttpError(msg, statusCode);
     }
@@ -322,7 +343,7 @@ export class AdminModel {
       throw new HttpError(msg, statusCode);
     }
 
-    const { password, ...rest } = (res.rows[0]) as Admin
+    const { password, ...rest } = res.rows[0] as Admin;
 
     return rest;
   }
