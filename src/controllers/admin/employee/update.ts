@@ -5,7 +5,7 @@ import { CollageREQ } from "../../../middlewares/signCollageIdToReq";
 
 const employee = new EmployeeModel();
 
-const updateAdmin = async (req: Request, res: Response, next: NextFunction) => {
+const updateEmployee = async (req: Request, res: Response, next: NextFunction) => {
   // Get data from body
   const id = req.params.id;
   const collageId = (req as CollageREQ).collageId;
@@ -39,4 +39,4 @@ const updateAdmin = async (req: Request, res: Response, next: NextFunction) => {
   });
 };
 
-export default updateAdmin;
+export default updateEmployee;

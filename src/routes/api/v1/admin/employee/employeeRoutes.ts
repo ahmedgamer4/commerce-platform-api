@@ -1,9 +1,9 @@
 import express from "express";
-import indexEmployee from "../../../../../../controllers/master/admins/employees";
-import createEmployee from "../../../../../../controllers/master/admins/employees/create";
-import removeEmployee from "../../../../../../controllers/master/admins/employees/remove";
-import showEmployee from "../../../../../../controllers/master/admins/employees/show";
-import updateEmployee from "../../../../../../controllers/master/admins/employees/update";
+import indexEmployee from "../../../../../controllers/admin/employee";
+import createEmployee from "../../../../../controllers/admin/employee/create";
+import removeEmployee from "../../../../../controllers/admin/employee/remove";
+import showEmployee from "../../../../../controllers/admin/employee/show";
+import updateEmployee from "../../../../../controllers/admin/employee/update";
 
 const employeeRouter = express.Router();
 
@@ -14,3 +14,4 @@ employeeRouter.patch('/:id', updateEmployee);
 employeeRouter.delete('/:id', removeEmployee);
 
 export default employeeRouter;
+
