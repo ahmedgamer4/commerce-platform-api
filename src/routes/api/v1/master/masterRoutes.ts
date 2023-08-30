@@ -9,7 +9,7 @@ const masterRoutes = express.Router();
 masterRoutes.get("/me", show);
 
 // Admin Routes
-collageRoutes.use(
+masterRoutes.use(
   "/:collageId/admins",
   (req, res, next) => {
     (req as any).collageId = req.params.collageId;
