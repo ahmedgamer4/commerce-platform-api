@@ -158,41 +158,9 @@ export default class EmployeeModel {
 
     let res;
     try {
-      if (name && passwordInput && email) {
-
-        const query = `UPDATE ${this.tableName} SET name=$1, password=$2, email=$3 WHERE id=$4 AND collage_id=$5 RETURNING *`;
-        const hashedPassword = await hashingPassword(passwordInput);
-        res = await connection.query(query, [name, hashedPassword, email, id, collageId]);
-      } else if (name && passwordInput) {
-
-        const query = `UPDATE ${this.tableName} SET name=$1, password=$2 WHERE id=$3 AND collage_id=$4  RETURNING *`;
-        const hashedPassword = await hashingPassword(passwordInput);
-        res = await connection.query(query, [name, hashedPassword, id, collageId]);
-      } else if (name && email) {
-
-        const query = `UPDATE ${this.tableName} SET name=$1, email=$2 WHERE id=$3 AND collage_id=$4 RETURNING *`;
-        res = await connection.query(query, [name, email, id, collageId]);
-      } else if (passwordInput && email) {
-
-        const query = `UPDATE ${this.tableName} SET email=$1, password=$2 WHERE id=$3 AND collage_id=$4 RETURNING *`;
-        const hashedPassword = await hashingPassword(passwordInput);
-        res = await connection.query(query, [email, hashedPassword, id, collageId]);
-      } else if (name && !passwordInput && !email) {
-
-        const query = `UPDATE ${this.tableName} SET name=$1 WHERE id=$2 AND collage_id=$3 RETURNING *`;
-        res = await connection.query(query, [name, id, collageId]);
-      } else if (email) {
-
-        const query = `UPDATE ${this.tableName} SET email=$1 WHERE id=$2 AND collage_id=$3 RETURNING *`;
-        res = await connection.query(query, [email, id, collageId]);
-      } else if (passwordInput) {
-
-        const query = `UPDATE ${this.tableName} SET  password=$1 WHERE id=$2 AND collage_id=$3 RETURNING *`;
-        const hashedPassword = hashingPassword(passwordInput);
-        res = await connection.query(query, [hashedPassword, id, collageId]);
-      } else {
-        return this.showEmployee(id, collageId);
-      }
+      const query = `UPDATE ${this.tableName} SET name = COALESCE($1, name), password = COALESCE($2, password), email = COALESCE($3, email) WHERE id=$4 AND collage_id=$5 RETURNING *`;
+      const hashedPassword = await hashingPassword(passwordInput);
+      res = await connection.query(query, [name, hashedPassword, email, id, collageId]);
     } catch (err) {
       const msg = `Could not update employee: ${(err as HttpError).message}`;
       const statusCode = 500;
