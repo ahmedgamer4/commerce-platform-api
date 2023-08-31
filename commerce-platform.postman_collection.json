@@ -1,0 +1,2254 @@
+{
+	"info": {
+		"_postman_id": "3e175eee-ec69-4a55-80a3-f478d87e6bc3",
+		"name": "commerce-platform",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25653268",
+		"_collection_link": "https://www.postman.com/dark-flare-54416/workspace/local/collection/25653268-3e175eee-ec69-4a55-80a3-f478d87e6bc3?action=share&source=collection_link&creator=25653268"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "signup-master",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the response JSON",
+									"const jsonData = pm.response.json();",
+									"",
+									"// Extract the data you want from the JSON response",
+									"const tokens = jsonData.data.tokens; ",
+									"",
+									"// Set the environment variable with the extracted data",
+									"pm.environment.set('masterTokens', tokens);",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Mohamed Yasser\",\n  \"email\": \"mohamed@mail.com\",\n  \"password\": \"pass354**&\", \n  \"masterKey\": \"4654sd6f54sd65f46s5d4f5s6d\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/signup-master",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"signup-master"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signup-applicant",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the response JSON",
+									"const jsonData = pm.response.json();",
+									"",
+									"// Extract the data you want from the JSON response",
+									"const tokens = jsonData.data.tokens; ",
+									"",
+									"// Set the environment variable with the extracted data",
+									"pm.environment.set('applicantTokens', tokens);",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Mohamed Yasser\",\n  \"email\": \"mohasmed@mail.com\",\n  \"password\": \"pass354**&\", \n  \"national_id\": \"4654sd6f54ssd65f46s5d4f5s6\",\n  \"gender\": \"male\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/signup-applicant",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"signup-applicant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login-master",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the response JSON",
+									"const jsonData = pm.response.json();",
+									"",
+									"// Extract the data you want from the JSON response",
+									"const tokens = jsonData.data.tokens; ",
+									"",
+									"// Set the environment variable with the extracted data",
+									"pm.environment.set('masterTokens', tokens);",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"role\": \"master\",\n  \"email\": \"mohamed@mail.com\",\n  \"password\": \"pass354**&\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login-admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the response JSON",
+									"const jsonData = pm.response.json();",
+									"",
+									"// Extract the data you want from the JSON response",
+									"const tokens = jsonData.data.tokens; ",
+									"",
+									"// Set the environment variable with the extracted data",
+									"pm.environment.set('adminTokens', tokens);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"role\": \"admin\",\n  \"email\": \"emails2@mail.com\",\n  \"password\": \"lksjdflkjsdf\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login-employee",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the response JSON",
+									"const jsonData = pm.response.json();",
+									"",
+									"// Extract the data you want from the JSON response",
+									"const tokens = jsonData.data.tokens; ",
+									"",
+									"// Set the environment variable with the extracted data",
+									"pm.environment.set('employeeTokens', tokens);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"role\": \"employee\",\n  \"email\": \"mail@mail.com\",\n  \"password\": \"newpass\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login-applicant",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the response JSON",
+									"const jsonData = pm.response.json();",
+									"",
+									"// Extract the data you want from the JSON response",
+									"const tokens = jsonData.data.tokens; ",
+									"",
+									"// Set the environment variable with the extracted data",
+									"pm.environment.set('applicantTokens', tokens);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"role\": \"applicant\",\n  \"email\": \"mohasmed@mail.com\",\n  \"password\": \"pass354**&\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "master",
+			"item": [
+				{
+					"name": "me",
+					"item": [
+						{
+							"name": "show",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{masterTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/master/me",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"master",
+										"me"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "collage",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{masterTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"collage 01\",\n  \"universityName\": \"KFU\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/master/collages",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"master",
+										"collages"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "index",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{masterTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/master/collages?page=3&limit=2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"master",
+										"collages"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "3"
+										},
+										{
+											"key": "limit",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{masterTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/master/collages/189908c8-d81d-4211-9362-94c65505df35",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"master",
+										"collages",
+										"189908c8-d81d-4211-9362-94c65505df35"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{masterTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"66\",\n  \"universityName\": \"null\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/master/collages/ff77d2ee-20a5-4f93-8477-6a761d73ce53",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"master",
+										"collages",
+										"ff77d2ee-20a5-4f93-8477-6a761d73ce53"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{masterTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/master/collages/189908c8-d81d-4211-9362-94c65505df35",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"master",
+										"collages",
+										"189908c8-d81d-4211-9362-94c65505df35"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "admin",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{masterTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"6\",\n  \"email\": \"emails2@mail.com\",\n  \"password\": \"lksjdflkjsdf\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/master/collages/ee73e9aa-d71e-47e3-8bc4-93b313213d3c/admins",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"master",
+										"collages",
+										"ee73e9aa-d71e-47e3-8bc4-93b313213d3c",
+										"admins"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "index",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{masterTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/master/collages/ff77d2ee-20a5-4f93-8477-6a761d73ce53/admins?page=1&limit=2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"master",
+										"collages",
+										"ff77d2ee-20a5-4f93-8477-6a761d73ce53",
+										"admins"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{masterTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/master/collages/ff77d2ee-20a5-4f93-8477-6a761d73ce53/admins/41d0a1f3-9c3b-46be-ad16-419ec4b8251d",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"master",
+										"collages",
+										"ff77d2ee-20a5-4f93-8477-6a761d73ce53",
+										"admins",
+										"41d0a1f3-9c3b-46be-ad16-419ec4b8251d"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{masterTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"666\",\n  \"email\": \"new@gmail.com\",\n  \"password\": \"nwelksjdf\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/master/collages/ff77d2ee-20a5-4f93-8477-6a761d73ce53/admins/41d0a1f3-9c3b-46be-ad16-419ec4b8251d",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"master",
+										"collages",
+										"ff77d2ee-20a5-4f93-8477-6a761d73ce53",
+										"admins",
+										"41d0a1f3-9c3b-46be-ad16-419ec4b8251d"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{masterTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/master/collages/ff77d2ee-20a5-4f93-8477-6a761d73ce53/admins/41d0a1f3-9c3b-46be-ad16-419ec4b8251d",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"master",
+										"collages",
+										"ff77d2ee-20a5-4f93-8477-6a761d73ce53",
+										"admins",
+										"41d0a1f3-9c3b-46be-ad16-419ec4b8251d"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "me",
+					"item": [
+						{
+							"name": "show",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/admin/me",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"me"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "program",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"new program\",\n  \"description\": \"description\",\n  \"applying_fees\": 778,\n  \"program_fees\": 9877,\n  \"open_at\": \"2023-08-29T12:00:00\",\n  \"close_at\": \"2023-09-20T12:00:00\",\n  \"credit_hour_fees\": 250\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/collages/6a833567-00ef-472b-853b-ce4910ac9b1e/programs",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"collages",
+										"6a833567-00ef-472b-853b-ce4910ac9b1e",
+										"programs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "index",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/collages/dae88e9b-903e-4cbc-bedc-979c4ed08738/programs?page=1&limit=2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"collages",
+										"dae88e9b-903e-4cbc-bedc-979c4ed08738",
+										"programs"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/collages/bb0fc90b-9df6-4b2a-9e2d-cc18c4092858/programs/fad57cd7-8953-48fb-9770-e33c59a240df",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"collages",
+										"bb0fc90b-9df6-4b2a-9e2d-cc18c4092858",
+										"programs",
+										"fad57cd7-8953-48fb-9770-e33c59a240df"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"new program 2\",\n  \"description\": \"description.......\",\n  \"applying_fees\": 777,\n  \"program_fees\": 9999,\n  \"open_at\": \"2023-09-20T12:00:00\",\n  \"close_at\": \"2023-01-20T12:00:00\",\n  \"credit_hour_fees\": 200\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/collages/ff77d2ee-20a5-4f93-8477-6a761d73ce53/programs/1f52a650-50d9-467e-841c-ed7d65e66ae0",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"collages",
+										"ff77d2ee-20a5-4f93-8477-6a761d73ce53",
+										"programs",
+										"1f52a650-50d9-467e-841c-ed7d65e66ae0"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "remove",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/collages/ff77d2ee-20a5-4f93-8477-6a761d73ce53/programs/1f52a650-50d9-467e-841c-ed7d65e66ae0",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"collages",
+										"ff77d2ee-20a5-4f93-8477-6a761d73ce53",
+										"programs",
+										"1f52a650-50d9-467e-841c-ed7d65e66ae0"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "program-files",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"new program 3\",\n  \"type\": \"image/jpeg\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/collages/ee73e9aa-d71e-47e3-8bc4-93b313213d3c/programs/9067b5df-834d-41df-bddd-57a1569eb548/program-files",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"collages",
+										"ee73e9aa-d71e-47e3-8bc4-93b313213d3c",
+										"programs",
+										"9067b5df-834d-41df-bddd-57a1569eb548",
+										"program-files"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "index",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/collages/ee73e9aa-d71e-47e3-8bc4-93b313213d3c/programs/9067b5df-834d-41df-bddd-57a1569eb548/program-files",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"collages",
+										"ee73e9aa-d71e-47e3-8bc4-93b313213d3c",
+										"programs",
+										"9067b5df-834d-41df-bddd-57a1569eb548",
+										"program-files"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "remove",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/collages/dae88e9b-903e-4cbc-bedc-979c4ed08738/programs/3aab8dff-6fe4-4535-92b3-e98c47d42508/program-files/79c67088-9f12-4386-b31c-b4ffa67212cf",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"collages",
+										"dae88e9b-903e-4cbc-bedc-979c4ed08738",
+										"programs",
+										"3aab8dff-6fe4-4535-92b3-e98c47d42508",
+										"program-files",
+										"79c67088-9f12-4386-b31c-b4ffa67212cf"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "employee",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"new program\",\n  \"email\": \"mail@mail.com\",\n  \"password\": \"newpass\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/collages/ee73e9aa-d71e-47e3-8bc4-93b313213d3c/employees",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"collages",
+										"ee73e9aa-d71e-47e3-8bc4-93b313213d3c",
+										"employees"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "index",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/collages/ff77d2ee-20a5-4f93-8477-6a761d73ce53/employees?page=1&limit=2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"collages",
+										"ff77d2ee-20a5-4f93-8477-6a761d73ce53",
+										"employees"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/collages/ff77d2ee-20a5-4f93-8477-6a761d73ce53/employees/19ff33f0-ce8f-45c9-a6c4-a35bc11e279e",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"collages",
+										"ff77d2ee-20a5-4f93-8477-6a761d73ce53",
+										"employees",
+										"19ff33f0-ce8f-45c9-a6c4-a35bc11e279e"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"new program 2\",\n  \"email\": \"mail6@mail.com\",\n  \"password\": \"newpass 4\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/collages/ff77d2ee-20a5-4f93-8477-6a761d73ce53/employees/19ff33f0-ce8f-45c9-a6c4-a35bc11e279e",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"collages",
+										"ff77d2ee-20a5-4f93-8477-6a761d73ce53",
+										"employees",
+										"19ff33f0-ce8f-45c9-a6c4-a35bc11e279e"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "remove",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/collages/ff77d2ee-20a5-4f93-8477-6a761d73ce53/employees/19ff33f0-ce8f-45c9-a6c4-a35bc11e279e",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"collages",
+										"ff77d2ee-20a5-4f93-8477-6a761d73ce53",
+										"employees",
+										"19ff33f0-ce8f-45c9-a6c4-a35bc11e279e"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "applicant",
+			"item": [
+				{
+					"name": "me",
+					"item": [
+						{
+							"name": "show",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{applicantTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/applicant/me",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"me"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "program",
+					"item": [
+						{
+							"name": "index",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{applicantTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/applicant/collages/dae88e9b-903e-4cbc-bedc-979c4ed08738/programs?page=1&limit=2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"collages",
+										"dae88e9b-903e-4cbc-bedc-979c4ed08738",
+										"programs"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{applicantTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/applicant/collages/dae88e9b-903e-4cbc-bedc-979c4ed08738/programs/3aab8dff-6fe4-4535-92b3-e98c47d42508",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"collages",
+										"dae88e9b-903e-4cbc-bedc-979c4ed08738",
+										"programs",
+										"3aab8dff-6fe4-4535-92b3-e98c47d42508"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "application",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{applicantTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/applicant/collages/ee73e9aa-d71e-47e3-8bc4-93b313213d3c/programs/9067b5df-834d-41df-bddd-57a1569eb548/applications",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"collages",
+										"ee73e9aa-d71e-47e3-8bc4-93b313213d3c",
+										"programs",
+										"9067b5df-834d-41df-bddd-57a1569eb548",
+										"applications"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "index",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{applicantTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/applicant/collages/ee73e9aa-d71e-47e3-8bc4-93b313213d3c/programs/9067b5df-834d-41df-bddd-57a1569eb548/applications?page=1&limit=2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"collages",
+										"ee73e9aa-d71e-47e3-8bc4-93b313213d3c",
+										"programs",
+										"9067b5df-834d-41df-bddd-57a1569eb548",
+										"applications"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{applicantTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/applicant/collages/ee73e9aa-d71e-47e3-8bc4-93b313213d3c/programs/9067b5df-834d-41df-bddd-57a1569eb548/applications/d0c3102a-ab23-4df6-9782-1e33ea32a2c4",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"collages",
+										"ee73e9aa-d71e-47e3-8bc4-93b313213d3c",
+										"programs",
+										"9067b5df-834d-41df-bddd-57a1569eb548",
+										"applications",
+										"d0c3102a-ab23-4df6-9782-1e33ea32a2c4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show Copy",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{applicantTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/applicant/collages/ee73e9aa-d71e-47e3-8bc4-93b313213d3c/programs/9067b5df-834d-41df-bddd-57a1569eb548/applications/d0c3102a-ab23-4df6-9782-1e33ea32a2c4",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"collages",
+										"ee73e9aa-d71e-47e3-8bc4-93b313213d3c",
+										"programs",
+										"9067b5df-834d-41df-bddd-57a1569eb548",
+										"applications",
+										"d0c3102a-ab23-4df6-9782-1e33ea32a2c4"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "program-files",
+					"item": [
+						{
+							"name": "index",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{applicantTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/applicant/collages/ee73e9aa-d71e-47e3-8bc4-93b313213d3c/programs/9067b5df-834d-41df-bddd-57a1569eb548/program-files",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"collages",
+										"ee73e9aa-d71e-47e3-8bc4-93b313213d3c",
+										"programs",
+										"9067b5df-834d-41df-bddd-57a1569eb548",
+										"program-files"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "employee",
+			"item": [
+				{
+					"name": "me",
+					"item": [
+						{
+							"name": "show",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{employeeTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/employee/me",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"employee",
+										"me"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "program",
+					"item": [
+						{
+							"name": "index",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{employeeTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/employee/collages/ee73e9aa-d71e-47e3-8bc4-93b313213d3c/programs?page=1&limit=2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"employee",
+										"collages",
+										"ee73e9aa-d71e-47e3-8bc4-93b313213d3c",
+										"programs"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{employeeTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/employee/collages/ee73e9aa-d71e-47e3-8bc4-93b313213d3c/programs/9067b5df-834d-41df-bddd-57a1569eb548",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"employee",
+										"collages",
+										"ee73e9aa-d71e-47e3-8bc4-93b313213d3c",
+										"programs",
+										"9067b5df-834d-41df-bddd-57a1569eb548"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "application",
+					"item": [
+						{
+							"name": "update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{employeeTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"status\": \"reviewed\",\n    \"feedback\": \"you have uploaded a fake documents\",\n    \"applying_fees_status\": true,\n    \"program_fees_status\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/employee/collages/ee73e9aa-d71e-47e3-8bc4-93b313213d3c/programs/9067b5df-834d-41df-bddd-57a1569eb548/applications/c79bbf19-8761-44f1-89e8-bad839e71f04",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"employee",
+										"collages",
+										"ee73e9aa-d71e-47e3-8bc4-93b313213d3c",
+										"programs",
+										"9067b5df-834d-41df-bddd-57a1569eb548",
+										"applications",
+										"c79bbf19-8761-44f1-89e8-bad839e71f04"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "index",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{employeeTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/employee/collages/ee73e9aa-d71e-47e3-8bc4-93b313213d3c/programs/9067b5df-834d-41df-bddd-57a1569eb548/applications?page=1&limit=2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"employee",
+										"collages",
+										"ee73e9aa-d71e-47e3-8bc4-93b313213d3c",
+										"programs",
+										"9067b5df-834d-41df-bddd-57a1569eb548",
+										"applications"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{employeeTokens}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/employee/collages/ee73e9aa-d71e-47e3-8bc4-93b313213d3c/programs/9067b5df-834d-41df-bddd-57a1569eb548/applications/c79bbf19-8761-44f1-89e8-bad839e71f04",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"employee",
+										"collages",
+										"ee73e9aa-d71e-47e3-8bc4-93b313213d3c",
+										"programs",
+										"9067b5df-834d-41df-bddd-57a1569eb548",
+										"applications",
+										"c79bbf19-8761-44f1-89e8-bad839e71f04"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "storage",
+			"item": [
+				{
+					"name": "aws-s3",
+					"item": [
+						{
+							"name": "upload",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.ms-excel"
+									}
+								],
+								"body": {
+									"mode": "file",
+									"file": {
+										"src": "/Users/cicada/Desktop/commerce-platform-admin_credentials.csv"
+									}
+								},
+								"url": {
+									"raw": "https://commerce-platform.s3.amazonaws.com/applications/c79bbf19-8761-44f1-89e8-bad839e71f04/04b7a5b6-c57b-40f3-a769-89cf6b4f75ea.jpeg?Content-Type=image%2Fjpeg&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAZUKGZYJVQU3LAB4K%2F20230831%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230831T120606Z&X-Amz-Expires=6000&X-Amz-Signature=8a6ccdc9e883a5b1ae357e443a2819bd67c2120c12cf909d12a08b49b8deaac2&X-Amz-SignedHeaders=host",
+									"protocol": "https",
+									"host": [
+										"commerce-platform",
+										"s3",
+										"amazonaws",
+										"com"
+									],
+									"path": [
+										"applications",
+										"c79bbf19-8761-44f1-89e8-bad839e71f04",
+										"04b7a5b6-c57b-40f3-a769-89cf6b4f75ea.jpeg"
+									],
+									"query": [
+										{
+											"key": "Content-Type",
+											"value": "image%2Fjpeg"
+										},
+										{
+											"key": "X-Amz-Algorithm",
+											"value": "AWS4-HMAC-SHA256"
+										},
+										{
+											"key": "X-Amz-Credential",
+											"value": "AKIAZUKGZYJVQU3LAB4K%2F20230831%2Fus-east-1%2Fs3%2Faws4_request"
+										},
+										{
+											"key": "X-Amz-Date",
+											"value": "20230831T120606Z"
+										},
+										{
+											"key": "X-Amz-Expires",
+											"value": "6000"
+										},
+										{
+											"key": "X-Amz-Signature",
+											"value": "8a6ccdc9e883a5b1ae357e443a2819bd67c2120c12cf909d12a08b49b8deaac2"
+										},
+										{
+											"key": "X-Amz-SignedHeaders",
+											"value": "host"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "access",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://unista-dev.s3.amazonaws.com/courses/6430e37e95394133234b0cdf/lecture/6434b916ccd7ab2e508b2ac3/resources/c4e01461-414b-4f38-9c2f-a4b114ad4dc3.png?AWSAccessKeyId=AKIAZUKGZYJVW6D5G2HU&Expires=1681178518&Signature=7O4kzrVY1yNOz0CKi26zYqLBZLM%3D",
+									"protocol": "https",
+									"host": [
+										"unista-dev",
+										"s3",
+										"amazonaws",
+										"com"
+									],
+									"path": [
+										"courses",
+										"6430e37e95394133234b0cdf",
+										"lecture",
+										"6434b916ccd7ab2e508b2ac3",
+										"resources",
+										"c4e01461-414b-4f38-9c2f-a4b114ad4dc3.png"
+									],
+									"query": [
+										{
+											"key": "AWSAccessKeyId",
+											"value": "AKIAZUKGZYJVW6D5G2HU"
+										},
+										{
+											"key": "Expires",
+											"value": "1681178518"
+										},
+										{
+											"key": "Signature",
+											"value": "7O4kzrVY1yNOz0CKi26zYqLBZLM%3D"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "storage",
+					"item": [
+						{
+							"name": "upload",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjoiNjQyZGUzZjQ4ZmNkMDgyMzlmNTVmNjlhIiwicm9sZSI6Im1hc3RlciJ9LCJpYXQiOjE2ODA3MjkwOTYsImV4cCI6MTY4MzMyMTA5Nn0.I1OSJJ3RywdmodyvYvRu2bN-2tEwPWbEEyceFCYmTS0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/storage/644b66d094df818f2f2903a1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"storage",
+										"644b66d094df818f2f2903a1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "access",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjoiNjQyZGUzZjQ4ZmNkMDgyMzlmNTVmNjlhIiwicm9sZSI6Im1hc3RlciJ9LCJpYXQiOjE2ODA3MjkwOTYsImV4cCI6MTY4MzMyMTA5Nn0.I1OSJJ3RywdmodyvYvRu2bN-2tEwPWbEEyceFCYmTS0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/storage/644b66d094df818f2f2903a1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"storage",
+										"644b66d094df818f2f2903a1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
