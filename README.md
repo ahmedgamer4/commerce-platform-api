@@ -4,7 +4,8 @@
 
 ### Env required
 **EX**
-```
+
+```bash
 # ENV info
 PORT=XXXX
 NODE_ENV=dev
@@ -30,7 +31,7 @@ JWT_EXPIRES_IN=XXXX
 
 ### DB Creation
 **NOTE:** You should create 2 databases locally in your PC
-```
+```bash
 psql -U YOUR-USERNAME
 Password: ....
 CREATE DATABASE store_dev;
@@ -57,16 +58,16 @@ CREATE DATABASE store_test;
 * Success response format ✅
 ```json
 {
-"message": "order found",
-"status": "success",
-"data": ...
+  "message": "order found",
+  "status": "success",
+  "data": ...
 }
 ```
 * Error response format ❌
 ```json
 {
-"message": "authorization denied",
-"status": "error"
+  "message": "authorization denied",
+  "status": "error"
 }
 ```
 
