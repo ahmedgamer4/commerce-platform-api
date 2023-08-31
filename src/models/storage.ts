@@ -52,6 +52,63 @@ export class StorageModel {
 
     return uploadUrl;
   }
-  // Access storage
+
+  // Find storage by owner id
+  async findStorageByOwnerId(ownerId: string) {
+    let connection;
+
+    try {
+      connection = await client.connect();
+    } catch (err) {
+      const msg = `Could not connect to database: ${
+        (err as HttpError).message
+      }`;
+      const statusCode = 500;
+      throw new HttpError(msg, statusCode);
+    }
+
+    let result;
+    try {
+      const sql = "SELECT * FROM storage WHERE owner = $1";
+      const values = [ownerId];
+      result = await connection.query(sql, values);
+    } catch (err) {
+      const msg = `Could not find storage: ${(err as HttpError).message}`;
+      const statusCode = 500;
+      throw new HttpError(msg, statusCode);
+    } finally {
+      connection.release();
+    }
+
+    // Create aws s3 presigned url to access all files
+    const files = result.rows;
+    const accessUrlPromises: Promise<{
+      name: string;
+      type: string;
+      downloadUrl: string;
+    }>[] = files.map(async (file: any) => {
+      const storageTyped: {
+        path: string;
+        name: string;
+        type: string;
+      } = file;
+
+      // Init storage variables
+      const { path, name, type } = storageTyped;
+      const typeExtension = type.split("/")[1];
+      const accessUrl = await generateAwsS3SignedUrlAccess(
+        `${path}/${name}.${typeExtension}`
+      );
+
+      return {
+        name: name,
+        type: type,
+        downloadUrl: accessUrl,
+      };
+    });
+
+    return Promise.all(accessUrlPromises);
+  }
+
   // Delete storage
 }
