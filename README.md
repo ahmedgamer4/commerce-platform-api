@@ -1,4 +1,4 @@
-# COMMERCE PLATFORM API
+[]()# COMMERCE PLATFORM API
 ## Getting started
 **NOTE:** First of all you should have postgress DB, node.js installed locally in your PC
 
@@ -256,10 +256,9 @@ console.log(data);
   };
 
   let bodyContent = JSON.stringify({
-    name: 'ALU',
-    city: 'Alexandria',
-    country: 'Egypt',
-  });
+	"name": "FCI",
+	"universityName": "Kafr Elsheikh"
+});
 
   let response = await fetch(
     'http://localhost:3000/api/v1/master/collages',
@@ -325,16 +324,15 @@ console.log(data);
 - _Headers:_ `Authorization`
 - _Request Body:_
 
-  ```json
-  {
-    "name": "ALU", // MIN: 2 - MAX: 50
-    "city": "Alexandria", // MIN: 2 - MAX: 50
-    "country": "egypt" // MIN: 2 - MAX: 50
-  }
-  ```
+```json
+{
+	"name": "FCI",
+	"universityName": "Kafr Elsheikh"
+}
+```
 
 - _Success Response:_ `200`
-  ```json
+```json
 {
     "status": "success",
     "message": "Collage updated successfully.",
@@ -348,10 +346,11 @@ console.log(data);
         }
     }
 }
-  ```
+```
+  
 - _Example - JS_:
 
-  ```js
+```js
   let headersList = {
     Accept: '*/*',
     Authorization:
@@ -360,10 +359,9 @@ console.log(data);
   };
 
   let bodyContent = JSON.stringify({
-    name: 'alu',
-    city: 'Alex',
-    country: 'Egypt',
-  });
+	"name": "FCI",
+	"universityName": "Kafr Elsheikh"
+});
 
   let response = await fetch(
     'http://localhost:3000/api/v1/master/collages/642deaa976e91123782b7f16',
@@ -376,19 +374,18 @@ console.log(data);
 
   let data = await response.text();
   console.log(data);
-  ```
-<a name="update-collage-master"></a>
+```
 ###### Delete collage
-<a name="update-collage-master"></a>
+<a name="delete-collage-master"></a>
 - _HTTP Method:_ `DELETE`
 - _Endpoint URL:_ `api/v1/master/collage/:collageId`
 - _Headers:_ `Authorization`
 - _Request Body:_ `None`
 - _Success Response:_ `200`
-  ```json
+```json
 {
     "status": "success",
-    "message": "Collage updated successfully.",
+    "message": "Collage deleted successfully.",
     "data": {
         "collage": {
             "id": "b0e5bda5-0d44-4572-ad63-76cbedf0a096",
@@ -399,7 +396,7 @@ console.log(data);
         }
     }
 }
-  ```
+```
 - _Example - JS_:
 
   ```js
@@ -441,7 +438,7 @@ console.log(data);
 
 - _Success Response:_ `201`
 
-  ```json
+```json
 {
     "status": "success",
     "message": "Admin created successfully",
@@ -456,10 +453,10 @@ console.log(data);
         }
     }
 }
-  ```
+```
 - _Example - JS_:
 
-  ```js
+```js
   let headersList = {
     Accept: '*/*',
     Authorization:
@@ -483,7 +480,7 @@ console.log(data);
   );
   let data = await response.text();
   console.log(data);
-  ```
+```
 
 ###### Index admin
 <a name="index-admin"></a>
@@ -493,7 +490,7 @@ console.log(data);
 - _Request Body_: `None`
 - _Success Response:_ `200`
 
-  ```json
+```json
 {
     "status": "success",
     "message": "Admins found successfully.",
@@ -527,10 +524,10 @@ console.log(data);
         "count": "3"
     }
 }
-  ```
+```
 - _Example - JS_:
 
-  ```js
+```js
 let headersList = {
   Accept: '*/*',
   Authorization:
@@ -547,7 +544,7 @@ let response = await fetch(
 );
 let data = await response.text();
 console.log(data);
-  ```
+```
 
 ###### Show admin 
 <a name="show-admin"></a>
@@ -556,7 +553,7 @@ console.log(data);
 - _Headers:_ `Authorization`
 - _Request Body:_ `None`
 - _Success Response:_ `200`
-  ```json
+```json
 {
     "status": "success",
     "message": "Admin retrieved successfully",
@@ -571,10 +568,10 @@ console.log(data);
         }
     }
 }
-  ```
+```
 - _Example - JS_:
 
-  ```js
+```js
   let headersList = {
     Accept: '*/*',
     Authorization:
@@ -592,7 +589,7 @@ console.log(data);
 
   let data = await response.text();
   console.log(data);
-  ```
+```
 
 
 ###### Update admin 
@@ -602,16 +599,16 @@ console.log(data);
 - _Headers:_ `Authorization`
 - _Request Body:_
 
-  ```json
+```json
 {
     "name": "mohamed",
     "password": "ahmed123456",
     "email": "a@email.com"
 }
-  ```
+```
 
 - _Success Response:_ `200`
-  ```json
+```json
 {
     "status": "success",
     "message": "Admin updated successfully",
@@ -626,10 +623,10 @@ console.log(data);
         }
     }
 }
-  ```
+```
 - _Example - JS_:
 
-  ```js
+```js
   let headersList = {
     Accept: '*/*',
     Authorization:
@@ -654,7 +651,7 @@ console.log(data);
 
   let data = await response.text();
   console.log(data);
-  ```
+```
 
 ###### Delete admin 
 <a name="delete-admin"></a>
@@ -663,7 +660,7 @@ console.log(data);
 - _Headers:_ `Authorization`
 - _Request Body:_ `None`
 - _Success Response:_ `200`
-  ```json
+```json
 {
     "status": "success",
     "message": "Admin removed successfully",
@@ -678,10 +675,10 @@ console.log(data);
         }
     }
 }
-  ```
+```
 - _Example - JS_:
 
-  ```js
+```js
   let headersList = {
     Accept: '*/*',
     Authorization:
@@ -699,7 +696,7 @@ console.log(data);
 
   let data = await response.text();
   console.log(data);
-  ```
+```
 
 #### Admin
 
@@ -712,7 +709,7 @@ console.log(data);
 - _Headers:_ `Authorization`
 - _Request Body:_ `None`
 - _Success Response:_ `200`
-  ```json
+```json
 {
     "status": "success",
     "message": "Collage found successfully.",
@@ -726,10 +723,10 @@ console.log(data);
         }
     }
 }
-  ```
+```
 - _Example - JS_:
 
-  ```js
+```js
   let headersList = {
     Accept: '*/*',
     Authorization:
@@ -747,7 +744,7 @@ console.log(data);
 
   let data = await response.text();
   console.log(data);
-  ```
+```
 
 ##### Employee
 
@@ -767,7 +764,7 @@ console.log(data);
 
 - _Success Response:_ `201`
 
-  ```json
+```json
 {
     "status": "success",
     "message": "Employee created successfully",
@@ -782,10 +779,10 @@ console.log(data);
         }
     }
 }
-  ```
+```
 - _Example - JS_:
 
-  ```js
+```js
   let headersList = {
     Accept: '*/*',
     Authorization:
@@ -809,7 +806,7 @@ console.log(data);
   );
   let data = await response.text();
   console.log(data);
-  ```
+```
 
 ###### Index employee
 <a name="index-employee-admin"></a>
@@ -819,7 +816,7 @@ console.log(data);
 - _Request Body_: `None`
 - _Success Response:_ `200`
 
-  ```json
+```json
 {
     "status": "success",
     "message": "Employees found successfully.",
@@ -853,10 +850,10 @@ console.log(data);
         "count": "3"
     }
 }
-  ```
+```
 - _Example - JS_:
 
-  ```js
+```js
 let headersList = {
   Accept: '*/*',
   Authorization:
@@ -873,7 +870,7 @@ let response = await fetch(
 );
 let data = await response.text();
 console.log(data);
-  ```
+```
 
 ###### Show employee
 <a name="show-employee-admin"></a>
@@ -882,7 +879,7 @@ console.log(data);
 - _Headers:_ `Authorization`
 - _Request Body:_ `None`
 - _Success Response:_ `200`
-  ```json
+```json
 {
     "status": "success",
     "message": "Employee retrieved successfully",
@@ -897,10 +894,10 @@ console.log(data);
         }
     }
 }
-  ```
+```
 - _Example - JS_:
 
-  ```js
+```js
   let headersList = {
     Accept: '*/*',
     Authorization:
@@ -918,26 +915,26 @@ console.log(data);
 
   let data = await response.text();
   console.log(data);
-  ```
+```
 
 
 ###### Update employee 
-<a name="show-employee-admin"></a>
+<a name="update-employee-admin"></a>
 - _HTTP Method:_ `PATCH`
 - _Endpoint URL:_ `api/v1/admin/collages/:collageId/employees/:employeeId`
 - _Headers:_ `Authorization`
 - _Request Body:_
 
-  ```json
+```json
 {
     "name": "mohamed1",
     "password": "ahmed123456",
     "email": "mohamed1@gmail.com"
 }
-  ```
+```
 
 - _Success Response:_ `200`
-  ```json
+```json
 {
     "status": "success",
     "message": "Employee updated successfully",
@@ -952,10 +949,10 @@ console.log(data);
         }
     }
 }
-  ```
+```
 - _Example - JS_:
 
-  ```js
+```js
   let headersList = {
     Accept: '*/*',
     Authorization:
@@ -980,7 +977,7 @@ console.log(data);
 
   let data = await response.text();
   console.log(data);
-  ```
+```
 
 ###### Delete employee
 <a name="delete-employee-admin"></a>
@@ -989,7 +986,7 @@ console.log(data);
 - _Headers:_ `Authorization`
 - _Request Body:_ `None`
 - _Success Response:_ `200`
-  ```json
+```json
 {
     "status": "success",
     "message": "Employee removed successfully",
@@ -1004,10 +1001,10 @@ console.log(data);
         }
     }
 }
-  ```
+```
 - _Example - JS_:
 
-  ```js
+```js
   let headersList = {
     Accept: '*/*',
     Authorization:
@@ -1025,7 +1022,7 @@ console.log(data);
 
   let data = await response.text();
   console.log(data);
-  ```
+```
 
 ##### Program
 
@@ -1049,7 +1046,7 @@ console.log(data);
 
 - _Success Response:_ `201`
 
-  ```json
+```json
 {
     "status": "success",
     "message": "Program created successfully.",
@@ -1070,10 +1067,10 @@ console.log(data);
     }
 }
 
-  ```
+```
 - _Example - JS_:
 
-  ```js
+```js
   let headersList = {
     Accept: '*/*',
     Authorization:
@@ -1101,7 +1098,7 @@ console.log(data);
   );
   let data = await response.text();
   console.log(data);
-  ```
+```
 
 ###### Index program
 <a name="index-program-admin"></a>
@@ -1111,7 +1108,7 @@ console.log(data);
 - _Request Body_: `None`
 - _Success Response:_ `200`
 
-  ```json
+```json
 {
     "status": "success",
     "message": "Programs fetched successfully.",
@@ -1134,10 +1131,10 @@ console.log(data);
         "count": "1"
     }
 }
-  ```
+```
 - _Example - JS_:
 
-  ```js
+```js
 let headersList = {
   Accept: '*/*',
   Authorization:
@@ -1154,7 +1151,7 @@ let response = await fetch(
 );
 let data = await response.text();
 console.log(data);
-  ```
+```
 
 ###### Show program
 <a name="show-program-admin"></a>
@@ -1163,7 +1160,7 @@ console.log(data);
 - _Headers:_ `Authorization`
 - _Request Body:_ `None`
 - _Success Response:_ `200`
-  ```json
+```json
 {
     "status": "success",
     "message": "Program fetched successfully.",
@@ -1183,10 +1180,10 @@ console.log(data);
         }
     }
 }
-  ```
+```
 - _Example - JS_:
 
-  ```js
+```js
   let headersList = {
     Accept: '*/*',
     Authorization:
@@ -1204,7 +1201,7 @@ console.log(data);
 
   let data = await response.text();
   console.log(data);
-  ```
+```
 
 
 ###### Update program
@@ -1214,7 +1211,7 @@ console.log(data);
 - _Headers:_ `Authorization`
 - _Request Body:_
 
-  ```json
+```json
 {
     "name": "programex",
 	"description": "any",
@@ -1224,10 +1221,10 @@ console.log(data);
 	"close_at": "2023-10-1",
 	"credit_hour_fees": 100
 }
-  ```
+```
 
 - _Success Response:_ `200`
-  ```json
+```json
 {
     "status": "success",
     "message": "Program updated successfully.",
@@ -1247,11 +1244,11 @@ console.log(data);
         }
     }
 }
-  ```
+```
   
 - _Example - JS_:
 
-  ```js
+```js
   let headersList = {
     Accept: '*/*',
     Authorization:
@@ -1276,7 +1273,7 @@ console.log(data);
 
   let data = await response.text();
   console.log(data);
-  ```
+```
 
 ###### Delete program
 <a name="delete-program-admin"></a>
@@ -1285,15 +1282,15 @@ console.log(data);
 - _Headers:_ `Authorization`
 - _Request Body:_ `None`
 - _Success Response:_ `200`
-  ```json
+```json
 {
     "status": "success",
     "message": "Program removed successfully."
 }
-  ```
+```
 - _Example - JS_:
 
-  ```js
+```js
   let headersList = {
     Accept: '*/*',
     Authorization:
@@ -1311,5 +1308,4 @@ console.log(data);
 
   let data = await response.text();
   console.log(data);
-  ```
-
+```
