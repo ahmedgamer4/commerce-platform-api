@@ -10,7 +10,7 @@ masterRoutes.get("/me", show);
 
 // Admin Routes
 masterRoutes.use(
-  "/:collageId/admins",
+  "/collages/:collageId/admins",
   (req, res, next) => {
     (req as any).collageId = req.params.collageId;
     next();

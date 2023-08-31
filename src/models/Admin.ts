@@ -195,7 +195,7 @@ export class AdminModel {
     };
   }
 
-  async showAdmin(id: string, collageId: string): Promise<AdminResp> {
+  async showAdmin(id: string, collageId?: string): Promise<AdminResp> {
     let connection;
     try {
       connection = await client.connect();

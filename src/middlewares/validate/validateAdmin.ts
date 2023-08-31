@@ -1,12 +1,15 @@
 import HttpError from "../../models/httpError";
 import { Request, Response, NextFunction } from "express";
+import { AdminModel } from "../../models/Admin";
 
 interface REQ extends Request {
   userId?: string;
   role?: string;
 }
 
-const validateAdmin = (req: REQ, res: Response, next: NextFunction) => {
+const admin = new AdminModel();
+
+const validateAdmin = async (req: REQ, res: Response, next: NextFunction) => {
   // Get authentication data from request
   const authenticatedUserId = req.userId;
   const authenticatedUserRole = req.role;
@@ -22,6 +25,23 @@ const validateAdmin = (req: REQ, res: Response, next: NextFunction) => {
     const statusCode = 401;
     return next(new HttpError(mes, statusCode));
   }
+
+  // Check if admin exists
+  let adminData;
+  try {
+    adminData = await admin.showAdmin(authenticatedUserId);
+  } catch (error) {
+    const mes = "Unauthorized.";
+    const statusCode = 401;
+    return next(new HttpError(mes, statusCode));
+  }
+
+  if (!adminData) {
+    const mes = "Unauthorized.";
+    const statusCode = 401;
+    return next(new HttpError(mes, statusCode));
+  }
+
   next();
 };
 

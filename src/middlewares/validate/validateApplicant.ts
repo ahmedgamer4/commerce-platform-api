@@ -1,15 +1,19 @@
 import HttpError from "../../models/httpError";
 import { Request, Response, NextFunction } from "express";
-import { MasterModel } from "../../models/Master";
+import { ApplicantModel } from "../../models/Applicant";
 
 interface REQ extends Request {
   userId?: string;
   role?: string;
 }
 
-const master = new MasterModel();
+const applicant = new ApplicantModel();
 
-const validateMaster = async (req: REQ, res: Response, next: NextFunction) => {
+const validateApplicant = async (
+  req: REQ,
+  res: Response,
+  next: NextFunction
+) => {
   // Get authentication data from request
   const authenticatedUserId = req.userId;
   const authenticatedUserRole = req.role;
@@ -19,25 +23,24 @@ const validateMaster = async (req: REQ, res: Response, next: NextFunction) => {
     const statusCode = 400;
     return next(new HttpError(mes, statusCode));
   }
-
-  // Check if user is master
-  if (authenticatedUserRole !== "master") {
+  // Check if user is applicant
+  if (authenticatedUserRole !== "applicant") {
     const mes = "Unauthorized.";
     const statusCode = 401;
     return next(new HttpError(mes, statusCode));
   }
 
-  // Check if master exists
-  let masterData;
+  // Check if applicant exists
+  let applicantData;
   try {
-    masterData = await master.showMaster(authenticatedUserId);
+    applicantData = await applicant.showApplicant(authenticatedUserId);
   } catch (error) {
     const mes = "Unauthorized.";
     const statusCode = 401;
     return next(new HttpError(mes, statusCode));
   }
 
-  if (!masterData) {
+  if (!applicantData) {
     const mes = "Unauthorized.";
     const statusCode = 401;
     return next(new HttpError(mes, statusCode));
@@ -46,4 +49,4 @@ const validateMaster = async (req: REQ, res: Response, next: NextFunction) => {
   next();
 };
 
-export default validateMaster;
+export default validateApplicant;

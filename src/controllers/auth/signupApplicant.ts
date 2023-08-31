@@ -1,28 +1,21 @@
-import { MasterModel } from "../../models/Master";
+import { ApplicantModel } from "../../models/Applicant";
 import HttpError from "../../models/httpError";
 import { Request, Response, NextFunction } from "express";
 import generateAuthTokens from "../../utils/generateAuthTokens";
 import validator from "validator";
 
-const master = new MasterModel();
+const applicant = new ApplicantModel();
 
-const signupMaster = async (
+const signupApplicant = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   // get data from request body
-  const { name, email, password, masterKey } = req.body;
-
-  // validate master key
-  if (masterKey !== process.env.MASTER_KEY) {
-    const mes = "Invalid master key.";
-    const statusCode = 400;
-    return next(new HttpError(mes, statusCode));
-  }
+  const { name, email, password, gender, national_id } = req.body;
 
   // validate data
-  if (!name || !email || !password) {
+  if (!name || !email || !password || !gender || !national_id) {
     const mes = "Invalid input.";
     const statusCode = 400;
     return next(new HttpError(mes, statusCode));
@@ -35,13 +28,19 @@ const signupMaster = async (
     return next(new HttpError(mes, statusCode));
   }
 
-  // create master
-  let masterData;
+  // create applicant
+  let applicantData;
   try {
-    masterData = await master.createMaster(name, email, password);
+    applicantData = await applicant.createApplicant(
+      email,
+      password,
+      name,
+      national_id,
+      gender
+    );
 
-    // check if masterData is empty
-    if (!masterData) {
+    // check if applicantData is empty
+    if (!applicantData) {
       const mes = "Could not create master.";
       const statusCode = 500;
       return next(new HttpError(mes, statusCode));
@@ -53,9 +52,9 @@ const signupMaster = async (
   // generate auth tokens
   let tokens;
   try {
-    const masterId = masterData.id;
-    const role = "master";
-    tokens = generateAuthTokens(masterId, role);
+    const applicantId = applicantData.id;
+    const role = "applicant";
+    tokens = generateAuthTokens(applicantId, role);
   } catch (error) {
     return next(error);
   }
@@ -63,16 +62,16 @@ const signupMaster = async (
   // send response
   res.status(201).json({
     status: "success",
-    message: "Master created successfully.",
+    message: "Applicant created successfully.",
     data: {
       master: {
-        id: masterData.id,
-        name: masterData.name,
-        email: masterData.email,
+        id: applicantData.id,
+        name: applicantData.name,
+        email: applicantData.email,
       },
       tokens,
     },
   });
 };
 
-export default signupMaster;
+export default signupApplicant;

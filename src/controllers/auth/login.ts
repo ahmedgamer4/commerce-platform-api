@@ -5,10 +5,12 @@ import { Request, Response, NextFunction } from "express";
 import generateAuthTokens from "../../utils/generateAuthTokens";
 import validator from "validator";
 import EmployeeModel from "../../models/Employee";
+import { ApplicantModel } from "../../models/Applicant";
 
 const master = new MasterModel();
 const admin = new AdminModel();
 const employee = new EmployeeModel();
+const applicant = new ApplicantModel();
 
 const login = async (req: Request, res: Response, next: NextFunction) => {
   // get data from request body
@@ -48,6 +50,15 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
     }
   } else if (role === "applicant") {
     // authenticate applicant
+    try {
+      const applicantData = await applicant.authenticateApplicant(
+        email,
+        password
+      );
+      authenticatedUserId = applicantData.id;
+    } catch (error) {
+      return next(error);
+    }
   } else if (role === "employee") {
     // authenticate employee
     try {

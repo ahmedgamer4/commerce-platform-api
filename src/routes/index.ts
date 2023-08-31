@@ -5,6 +5,8 @@ import auth from "../middlewares/auth";
 import validateMaster from "../middlewares/validate/validateMaster";
 import validateAdmin from "../middlewares/validate/validateAdmin";
 import adminRoutes from "./api/v1/admin/adminRoutes";
+import applicantRoutes from "./api/v1/applicant/applicantRoutes";
+import validateApplicant from "../middlewares/validate/validateApplicant";
 
 const routes = expres.Router();
 
@@ -16,5 +18,8 @@ routes.use("/v1/master", auth, validateMaster, masterRoutes);
 
 // Admin Routes [Authentication required]
 routes.use("/v1/admin", auth, validateAdmin, adminRoutes);
+
+// Applicant Routes [Authentication required]
+routes.use("/v1/applicant", auth, validateApplicant, applicantRoutes);
 
 export default routes;
